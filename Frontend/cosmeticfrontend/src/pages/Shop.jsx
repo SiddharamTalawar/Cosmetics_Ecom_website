@@ -10,12 +10,16 @@ function Shop(){
     const [produstslist, setProdustslist] = useState([]); 
     const [searchprodustslist, setsearchProdustslist] = useState([]); 
     const [categoryprodustslist, setcategoryProdustslist] = useState([]); 
+    const [cart, setcart] = useState([]); 
     const [search_data, setsearch_data] = useState(""); 
     const [category, setcategory] = useState(""); 
     useEffect(() => {
         getprodusts_list();
     }, []);
 
+    useEffect(() => {
+        count_products()
+}, [cart]);
     // search function 
     function search(data){
         
@@ -43,7 +47,7 @@ function Shop(){
                 .toLowerCase()
                 .includes(data.toLowerCase())) { return item; }
         })
-        // console.log(filterBycategory)
+       
         setcategoryProdustslist(filterBycategory)
 
     }
@@ -62,6 +66,30 @@ function Shop(){
             })
             .catch((err) => alert(err));
     };
+    // add item to cart
+    const addProductToCartFunction = (data) => {
+        
+        const alreadyCourses = cart
+                               .find(item => item.product.id === data.id);
+        if (alreadyCourses) {
+            const latestCartUpdate = cart.map(item =>
+                item.product.id === data.id ? { 
+                ...item, quantity: item.quantity + 1 } 
+                : item
+            );
+            setcart(latestCartUpdate);
+        } else {
+            setcart([...cart, {product: data, quantity: 1}]);
+        }
+        console.log(cart)
+    };
+    // counting and updating num of items in cart
+    function count_products(){
+        let count = 0
+        cart.map(item => count += item.quantity)
+        document.getElementById("cart_count").innerHTML = count
+        
+    }
 
     // conditions to check which product list to load(all/searched/sorted).
     let data_list;
@@ -80,7 +108,7 @@ function Shop(){
         {/* product list */}
         
         <div className="product_list flex justify-center flex-wrap gap-6 w-2/3 bg-white pl-2 pt-32 pb-32">{data_list.map((product) => (
-            <Products product={product}  key={product.id} />
+            <Products product={product}  key={product.id} addProductToCartFunction={addProductToCartFunction} />
             
         ))}</div> 
         

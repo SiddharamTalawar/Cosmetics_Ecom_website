@@ -1,14 +1,22 @@
 import { useState } from 'react'
 import { FaIndianRupeeSign } from "react-icons/fa6";
 import { LiaRupeeSignSolid } from "react-icons/lia";
+import { BsFillHandbagFill } from "react-icons/bs";
+import { MdArrowRight } from "react-icons/md";
 function Products(props) {
     
-    
+   
     let img = [props.product.product_image]
     
     return (
         <div className="products ">
-            <div className="product_image w-44 h-44 mb-3">
+            <div className="product_image w-44 h-44 mb-3 relative  group ">
+                <div className="cart_btn group"><div className="cart_img_container text-l cursor-pointer absolute left-32 top-4 bg-white  p-2 rounded-full w-8 opacity-0 group-hover:opacity-100 transition ease-in-out delay-150 shadow-xl " onClick={()=>  props.addProductToCartFunction(props.product)}><i><BsFillHandbagFill /></i></div>
+                <div className="add_to_cart_btn absolute text-3xl left-24 top-4  p-2 opacity-0 group-hover:opacity-100 transition ease-in-out delay-150   "><MdArrowRight/></div>
+                <div className="add_to_cart_btn absolute left-8 top-4 bg-black text-white p-2 rounded-md border-r-2 opacity-0  border-r-white text-sm group-hover:opacity-100 transition ease-in-out delay-150">Add to cart </div></div>
+                
+                
+                
                 <img src={img} alt="product image" />
             </div>
             <div className="product_name ">

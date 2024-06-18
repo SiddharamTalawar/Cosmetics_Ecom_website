@@ -1,5 +1,6 @@
 
 import { BsFillHandbagFill } from "react-icons/bs";
+import { GoDotFill } from "react-icons/go";
 function Header(){
 
     return(
@@ -12,7 +13,8 @@ function Header(){
                 <p className="hover:text-teal-400 cursor-pointer">Testimonial</p>
                 <p className="hover:text-teal-400 cursor-pointer">About</p>
                 <p className="hover:text-teal-400 cursor-pointer">contact</p>
-                <i><BsFillHandbagFill className="text-2xl cursor-pointer"/></i>
+                <div className="cart_icon relative"><i><BsFillHandbagFill className="text-2xl cursor-pointer"/></i><div className="cart_num_icon"><i className="text-[40px] absolute bottom-2"><p id="cart_count" className="text-white absolute bottom-3 text-sm left-4 ">0</p><GoDotFill/></i></div></div>
+                
             </div>
         </div>
         </>
