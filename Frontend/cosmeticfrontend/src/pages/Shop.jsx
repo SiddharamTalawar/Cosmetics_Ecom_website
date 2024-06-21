@@ -1,25 +1,25 @@
 import React from 'react'
-import { useState,useEffect } from 'react'
+import { useState,useEffect,useContext  } from 'react'
 import Products from '../components/Products';
 import api from '../api';
 import Header from '../components/Header';
 import Search from '../components/Search';
 import Filterbycategoreys from '../components/Filterbycategoreys';
 import Footer from '../components/Footer';
+import  {Context}  from '../MyContext';
 function Shop(){
     const [produstslist, setProdustslist] = useState([]); 
     const [searchprodustslist, setsearchProdustslist] = useState([]); 
     const [categoryprodustslist, setcategoryProdustslist] = useState([]); 
-    const [cart, setcart] = useState([]); 
+    // const [cart, setcart] = useState([]); 
     const [search_data, setsearch_data] = useState(""); 
     const [category, setcategory] = useState(""); 
+    const { cartItems, setcartItems } = useContext(Context);
     useEffect(() => {
         getprodusts_list();
     }, []);
 
-    useEffect(() => {
-        count_products()
-}, [cart]);
+    
     // search function 
     function search(data){
         
@@ -69,27 +69,22 @@ function Shop(){
     // add item to cart
     const addProductToCartFunction = (data) => {
         
-        const alreadyCourses = cart
+        const alreadyCourses = cartItems
                                .find(item => item.product.id === data.id);
         if (alreadyCourses) {
-            const latestCartUpdate = cart.map(item =>
+            const latestCartUpdate = cartItems.map(item =>
                 item.product.id === data.id ? { 
                 ...item, quantity: item.quantity + 1 } 
                 : item
             );
-            setcart(latestCartUpdate);
+            setcartItems(latestCartUpdate);
         } else {
-            setcart([...cart, {product: data, quantity: 1}]);
+            setcartItems([...cartItems, {product: data, quantity: 1}]);
         }
-        console.log(cart)
+        console.log(cartItems)
     };
     // counting and updating num of items in cart
-    function count_products(){
-        let count = 0
-        cart.map(item => count += item.quantity)
-        document.getElementById("cart_count").innerHTML = count
-        
-    }
+    
 
     // conditions to check which product list to load(all/searched/sorted).
     let data_list;

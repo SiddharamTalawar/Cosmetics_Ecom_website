@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { FaIndianRupeeSign } from "react-icons/fa6";
+
 import { LiaRupeeSignSolid } from "react-icons/lia";
 import { BsFillHandbagFill } from "react-icons/bs";
 import { MdArrowRight } from "react-icons/md";
