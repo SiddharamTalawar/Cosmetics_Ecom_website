@@ -1,0 +1,19 @@
+/* .input{
+    @apply p-2 m-8  mr-0 border-2 border-slate-300
+}
+.input:focus{
+    @apply border-2 border-teal-400
+} */
+label{
+    margin-left: 20px;
+    margin-bottom: -10px;
+}
+.user_data_form input{
+    width: 620px;
+    padding: 10px;
+    margin: 10px;
+    border-radius: 5px;
+    border: 1px solid #ccc;
+    margin-bottom:10px ;
+    margin-left: 20px;
+}
