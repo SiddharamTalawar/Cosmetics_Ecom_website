@@ -9,7 +9,7 @@ function Cart() {
     const { cartItems, setcartItems } = useContext(Context);
     const[CartQuantity,setCartQuantity] = useState([])
     const[enable,setenable] = useState(false)
-    console.log(cartItems)
+    // console.log(cartItems)
     // function to remove product from cart
     function removeProductFromCart(product){
         let newCart = cartItems.filter((item) => item.product !== product)
@@ -17,25 +17,26 @@ function Cart() {
     }
     const changeProductQuantityInCartFunction = (data,new_quantity) => {
         setenable(true)
-        console.log(data,new_quantity)
+        // console.log(data,new_quantity)
+        let data_list = CartQuantity.length === cartItems.length ? CartQuantity : cartItems
         const alreadyCourses = cartItems
                                .find(item => item.product.id === data.id);
         if (alreadyCourses) {
-            const latestCartUpdate = cartItems.map(item =>
+            const latestCartUpdate = data_list.map(item =>
                 item.product.id === data.id ? { 
-                ...item, quantity: new_quantity } 
+                ...item, quantity: Number(new_quantity) } 
                 : item
             );
             setCartQuantity(latestCartUpdate);
         } else {
             console.log("iteamnot found in cart")
         }
-        console.log(setCartQuantity)
+        // console.log(CartQuantity)
     };
     function updateCart(){
         setcartItems(CartQuantity)
         setenable(false)
-        console.log("updated cart",CartQuantity)
+        // console.log("updated cart",CartQuantity)
     }
     return(<>
     <div className="cart_container">
@@ -117,7 +118,8 @@ function Cart() {
                 </div>
             </div>
             <div className="checkout_btn p-2 border-b-2">
-                <button className='bg-teal-400 p-3 px-10 text-white w-80 mr-5 '>Checkout</button>
+                <Link to="/checkout"><button className='bg-teal-400 p-3 px-10 text-white w-80 mr-5 '>Checkout</button></Link>
+                
             </div>
 
         </div>
