@@ -1,4 +1,4 @@
-import { useState,useContext } from 'react'
+import { useState,useContext, useEffect } from 'react'
 import Header from '../components/Header';
 import "../styles/Checkout.css" 
 import { Context } from '../MyContext';
@@ -6,6 +6,8 @@ import { LiaRupeeSignSolid } from "react-icons/lia";
 import Footer from '../components/Footer';
 import api from '../api';
 import { CgDanger } from "react-icons/cg";
+import Payment from './Payment';
+import { useNavigate } from 'react-router-dom';
 function Checkout() {
     const { cartItems, setcartItems } = useContext(Context);
     const [firstName, setFirstName] = useState("");
@@ -15,8 +17,19 @@ function Checkout() {
     const [address, setaddress] = useState("");
     const [picode, setpicode] = useState("");
     const [PaymentMethod, setPaymentMethod] = useState("stripe");
+    const [clsecret, setclsecret] = useState("");
     const [errors, setErrors] = useState({});
 
+    const navigate = useNavigate();
+    // function to redirect to stripe payment page
+    useEffect(() => {
+        if (clsecret) {
+            redirectToPayment(clsecret)
+        }
+    }, [clsecret])
+    const redirectToPayment = (clsecret) => {
+        navigate("/payment", { state: { cl_secret: clsecret } });
+    }
     // function to submit form
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -43,8 +56,11 @@ function Checkout() {
             })
             .then((res) => res.data)
             .then((data) => {
-                console.log(data)
+                setclsecret(data.payment.clientSecret)
+                console.log(data.payment.clientSecret)
+                // redirectToPayment(data.payment.clientSecret)
             })
+            
             .catch((err) => alert(err));
     }
 
@@ -89,6 +105,7 @@ function Checkout() {
            <div className="header_container">
                <Header/>
            </div>
+           {/* {clsecret? <Payment clsecret={clsecret} /> : null} */}
            <div className="div text-3xl font-semibold border-b-2 border-teal-400 py-4 mb-12 ml-[20px] mr-16"><h1>Checkout</h1></div>
            {/* error container */}
            {errors && Object.keys(errors).length > 0 && (
@@ -237,6 +254,7 @@ function Checkout() {
            </div>
            
            </div>
+           
            <div className="footer_container"><Footer/></div>
 
         </div>

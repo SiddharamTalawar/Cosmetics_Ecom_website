@@ -8,6 +8,9 @@ from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
+import json
+import os
+import stripe
 
 
 class ProductListCreateAPIView(generics.ListCreateAPIView):
@@ -40,7 +43,9 @@ class CaregorySortApiView(APIView):
         
 
 class CheckoutApiView(APIView):
+    
     def post(self, request, format=None):
+        total_price = 0
         first_name = self.request.data.get('first_name')
         last_name = self.request.data.get('last_name')
         email = self.request.data.get('email')
@@ -67,5 +72,50 @@ class CheckoutApiView(APIView):
                 price=product.product_price*int(item['quantity']),
                 quantity=item['quantity']
             )
-        
-        return Response({"message": "Checkout successful"}, status=status.HTTP_200_OK)
+            total_price += product.product_price*int(item['quantity'])
+
+        if PaymentMethod == 'cod':
+            # order.paid = True
+            # order.paid_amount = total_price
+            # order.save()
+            return Response({"message": "Checkout successful", "total_price": total_price}, status=status.HTTP_200_OK)
+        else:
+            payment = create_payment(total_price)
+            # order.paid = True
+            # order.paid_amount = total_price
+            # order.save()
+            # return Response(payment, status=status.HTTP_200_OK)   
+        return Response({"message": "Checkout successful", "total_price": total_price, "payment": payment}, status=status.HTTP_200_OK)
+    
+
+
+
+
+
+
+
+stripe.api_key = 'sk_test_51PVreY2Kpxj32LXyNEApLUIjXVT2g1WMKaeY7TsU6aeHWmkrXouN0uFw9hKXfQcv3GNIePPtl85AAVGWgkYYEoN500t5ZD10Kj'
+
+
+
+
+
+
+def create_payment(total_price):
+    try:
+        # data = json.loads(request.data)
+        # Create a PaymentIntent with the order amount and currency
+        intent = stripe.PaymentIntent.create(
+            amount=int(total_price),
+            currency='usd',
+            # In the latest version of the API, specifying the `automatic_payment_methods` parameter is optional because Stripe enables its functionality by default.
+            automatic_payment_methods={
+                'enabled': True,
+            },
+        )
+        return {
+            'clientSecret': intent['client_secret']
+        }
+    except Exception as e:
+        return {"error":str(e)}
+
