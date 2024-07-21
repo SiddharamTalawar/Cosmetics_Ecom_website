@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 
 
-function Header(){
+function Header(props) {
     const { cartItems, setcartItems } = useContext(Context);
     useEffect(() => {
         count_products()
@@ -17,13 +17,15 @@ function count_products(){
     document.getElementById("cart_count").innerHTML = count
     
 }
-    console.log("header",cartItems)
+    // console.log("header",cartItems)
     return(
         <>
         <div className="header">
-            <div className=" text-center mb-8 text-4xl p-6 bg-white"><h1>Cosmetics</h1></div>
+            {props.home ? <div className="text-center mb-8 text-4xl p-6"><h1>Cosmetics</h1></div> : <div className=" text-center mb-8 text-4xl p-6 bg-white "><h1>Cosmetics</h1></div>}
+            
             <div className="navbar flex gap-10 text-center place-content-center mb-20">
-                <p className="hover:text-teal-400 cursor-pointer">Home</p>
+            <Link to="/home"><p className="hover:text-teal-400 cursor-pointer">Home</p></Link>
+                
                 <Link to="/shop"><p className="hover:text-teal-400 cursor-pointer">Shop</p></Link>
                 
                 <p className="hover:text-teal-400 cursor-pointer">Testimonial</p>

@@ -8,16 +8,17 @@ import Filterbycategoreys from '../components/Filterbycategoreys';
 import Footer from '../components/Footer';
 import  {Context}  from '../MyContext';
 function Shop(){
-    const [produstslist, setProdustslist] = useState([]); 
+    // const [produstslist, setProdustslist] = useState([]); 
     const [searchprodustslist, setsearchProdustslist] = useState([]); 
     const [categoryprodustslist, setcategoryProdustslist] = useState([]); 
     // const [cart, setcart] = useState([]); 
     const [search_data, setsearch_data] = useState(""); 
     const [category, setcategory] = useState(""); 
     const { cartItems, setcartItems } = useContext(Context);
-    useEffect(() => {
-        getprodusts_list();
-    }, []);
+    const { produstslist, setProdustslist } = useContext(Context);
+    // useEffect(() => {
+    //     getprodusts_list();
+    // }, []);
 
     
     // search function 
@@ -30,7 +31,7 @@ function Shop(){
             if (item.product_name.toLowerCase()
                 .includes(data.toLowerCase())) { return item; }
         })
-        console.log(filterBySearch)
+        // console.log(filterBySearch)
         setsearchProdustslist(filterBySearch)
         // console.log(setProdustslist)
 
@@ -51,21 +52,21 @@ function Shop(){
         setcategoryProdustslist(filterBycategory)
 
     }
-    // get products list from Backend
-    const getprodusts_list = () => {
-        setcategory("");
-        setsearch_data("");
-        api
-            .get("shop/products/")
-            .then((res) => res.data)
+    // // get products list from Backend
+    // const getprodusts_list = () => {
+    //     setcategory("");
+    //     setsearch_data("");
+    //     api
+    //         .get("shop/products/")
+    //         .then((res) => res.data)
             
-            .then((data) => {
+    //         .then((data) => {
                 
-                setProdustslist(data.results);
+    //             setProdustslist(data.results);
                 
-            })
-            .catch((err) => alert(err));
-    };
+    //         })
+    //         .catch((err) => alert(err));
+    // };
     // add item to cart
     const addProductToCartFunction = (data) => {
         
@@ -81,7 +82,7 @@ function Shop(){
         } else {
             setcartItems([...cartItems, {product: data, quantity: 1}]);
         }
-        console.log(cartItems)
+        // console.log(cartItems)
     };
     // counting and updating num of items in cart
     

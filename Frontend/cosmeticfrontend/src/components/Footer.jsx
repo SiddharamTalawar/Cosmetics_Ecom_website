@@ -1,7 +1,7 @@
 import { CiFacebook,CiYoutube,CiTwitter,CiInstagram   } from "react-icons/ci";
 function Footer(){
     return(
-        <div className="footer bg-black text-white pl-5 pt-28 pb-10 pr-5 mt-20">
+        <div className="footer bg-black text-white pl-5 pt-28 pb-10 pr-5 ">
             <div className="f_upper flex justify-between">
                 <div className="f_upper_left">
                     <div className="div text-2xl mb-5  ">
