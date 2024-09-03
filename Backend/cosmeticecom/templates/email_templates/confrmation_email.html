@@ -1,0 +1,17 @@
+<div style="text-align: center">
+  <h3>your order is confirmed, your order ID is {{order_id}}</h3>
+
+  <p>order details</p>
+  {% for item in cartItems %}
+  <p>
+    {{item.product.product_name}} - {{item.quantity}} x
+    {{item.product.product_price}}
+  </p>
+  {% endfor %}
+
+  <p>total ammount is {{total_price}}</p>
+
+  <p>will be delivered to {{address}}, pincode {{pincode}}</p>
+
+  <h3>Thank you for shopping at cosmetics</h3>
+</div>
