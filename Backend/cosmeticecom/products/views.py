@@ -15,9 +15,16 @@ from products.tasks import send_mail_to_customer, send_receipt_to_email
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from django.core.mail import EmailMultiAlternatives
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.core.cache.backends import locmem
+from django.utils import timezone
+import datetime
 
 
+# @method_decorator(cache_page(60 * 5), name='dispatch')
 class ProductListCreateAPIView(generics.ListCreateAPIView):
+    # print("calling ProductListCreateAPIView")
     queryset = Product.objects.all()
     serializer_class = ProductSerializer
 
@@ -148,3 +155,16 @@ class send_order_conformation_mail(APIView):
         result = send_mail_to_customer.delay(username, useremail)
         # print(result.ready())
         return Response({"message": "message sent successful"}, status=status.HTTP_200_OK)
+
+
+class CacheTestView(APIView):
+    # With auth: cache requested url for each user for 2 hours
+    @method_decorator(cache_page(60 * 5))
+    def get(self, request, format=None):
+        # print("cache test", timezone.now())
+        content = {
+            "Timestampzone": timezone.now(),
+            "Timestampzonelocal": timezone.localtime(),
+            "Timestampnive":   datetime.datetime.now(),
+        }
+        return Response(content)

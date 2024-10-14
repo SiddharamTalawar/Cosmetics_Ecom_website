@@ -113,7 +113,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 
@@ -159,3 +159,14 @@ EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'siddharamtalawar10@gmail.com'
 EMAIL_HOST_PASSWORD = 'enwo gktp phzy imtp'
+
+
+# cache settings...........................
+
+CACHES = {
+    "default": {
+        "BACKEND": "django.core.cache.backends.locmem.LocMemCache",
+        "TIMEOUT": 300,
+        "OPTIONS": {"MAX_ENTRIES": 300},
+    }
+}
