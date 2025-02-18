@@ -1,29 +1,180 @@
 .hero_section {
-    background-image: url('../assets/cosmetic-hero-1.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    height: 125vh;
+  background-image: url("../assets/cosmetic-hero-1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 125vh;
 }
 .section_6 {
-    background-image: url('../assets/cosmetic-hero-2.png');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    height: 100vh;
+  background-image: url("../assets/cosmetic-hero-2.png");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
 }
 /* .signupform {
     z-index: 1;
     position: relative;
 } */
 .signupform {
-    background-image: url('../assets/cosmetic-signup.png') ;
-    background-size: cover;
-    background-position: center;
-    /* background-attachment: fixed; */
-    height: 30vh;
-    /* opacity: 0.3;
+  background-image: url("../assets/cosmetic-signup.png");
+  background-size: cover;
+  background-position: center;
+  /* background-attachment: fixed; */
+  height: 30vh;
+  /* opacity: 0.3;
     z-index: -1;
     content: '';
     position: absolute; */
+}
+.navbar-logo {
+  display: none;
+  color: white;
+  font-size: 35px;
+  margin-top: 28px;
+}
+.navbar-menu {
+  display: none;
+  color: black;
+  font-size: 24px;
+  margin-right: 20px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background-color: white;
+  width: 425px;
+}
+.navbar-menu p {
+  padding: 4px 10px;
+  border-bottom: 1px solid black;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 15px;
+  background-color: #f7f7f7;
+  font-weight: 300;
+}
+.navbar-menu a {
+  width: 100%;
+}
+.open {
+  display: none;
+}
+
+@media screen and (min-width: 481px) and (max-width: 1024px) {
+  .section_3 .img_container img {
+    width: auto;
+    height: 100%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero_section {
+    width: 425px;
+  }
+  .hero_text .big_text {
+    width: 300px;
+    font-size: 30px;
+    font-weight: 400;
+    line-height: 60px;
+  }
+  .hero_section .header {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+  }
+  .hero_section .navbar {
+    display: none;
+  }
+  .hero_section .navbar-logo {
+    display: flex;
+  }
+  .open {
+    display: flex;
+  }
+
+  /* product  */
+  .product_list {
+    margin: 0 !important;
+  }
+  .product_image {
+    width: 160px !important;
+    height: 160px !important;
+    /* margin-bottom: 10px; */
+  }
+  .product_name_container {
+    margin-top: -10px;
+  }
+  .product_name {
+    font-size: 17px;
+  }
+  .section_3 .img_container {
+    display: none;
+  }
+  .section_3 {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .section_4 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .card_container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-left: 0 !important; /* ############  padding has important value  ############ */
+    margin-top: 10px !important;
+  }
+  .card_container p {
+    text-align: center;
+    width: 300px;
+  }
+
+  /* carousel-item  */
+  .carousel-item {
+  }
+  /* sign up form */
+  .signupform {
+    flex-direction: column;
+    margin-bottom: 30px;
+  }
+  .signupform_text p {
+    font-size: 25px;
+    margin-left: 20px;
+    font-weight: 500;
+  }
+
+  /*  */
+  .footer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    padding: 50px !important; /* ############  padding has important value  ############ */
+  }
+  .f_upper,
+  .f_lower,
+  .f_upper_left,
+  .f_upper_right,
+  .f_upper_center,
+  .f_lower_left,
+  .footer a,
+  .f_lower_left p {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .f_upper,
+  .f_lower {
+    gap: 20px;
+  }
 }
