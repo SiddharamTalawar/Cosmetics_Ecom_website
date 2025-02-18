@@ -63,13 +63,59 @@
 }
 
 @media screen and (min-width: 481px) and (max-width: 1024px) {
+  /* tablet header section */
+  .hero_text .big_text {
+    width: 300px;
+    font-size: 50px;
+    font-weight: 400;
+    line-height: 60px;
+  }
+  .hero_paragraph {
+    font-size: 18px;
+  }
+  .navbar-menu {
+    width: 768px;
+  }
+  .hero_section .header {
+    display: flex;
+    justify-content: space-between;
+    margin-right: 30px;
+  }
+  .hero_section .navbar {
+    display: none;
+  }
+  .hero_section .navbar-logo {
+    display: flex;
+  }
+  .open {
+    display: flex;
+  }
   .section_3 .img_container img {
     width: auto;
     height: 100%;
   }
+  .product_image {
+    width: 200px !important;
+    height: 200px !important;
+  }
+  .product_name {
+    font-size: 17px !important;
+  }
+  .signupform_text {
+    width: 250px !important;
+    font-size: 30px !important;
+  }
+  .footer {
+    padding-left: 20px !important;
+    padding-right: 20px !important;
+  }
+  .f_lower_left p {
+    width: 300px !important;
+  }
 }
 
 @media screen and (max-width: 480px) {
+  /* header section */
   .hero_section {
     width: 425px;
   }

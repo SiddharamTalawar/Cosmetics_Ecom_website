@@ -45,7 +45,7 @@ function Home() {
           <p className="big_text text-[90px] font-semibold mb-3 leading-[120px]">
             Beauty Pronounced
           </p>
-          <p className="mb-10">
+          <p className="hero_paragraph mb-10">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit
             tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo
             adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis.
